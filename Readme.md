@@ -32,9 +32,9 @@ pip3 install -r requirements.txt
 ```python
 TOKEN = ''  # токен Telegram бота
 
-cam_1 = "" # rtsp данные камеры
+CAM_1 = "" # rtsp данные камеры
 
-rtsp_ping = "" # IP роутера
+RTSP_PING = "" # IP роутера
 ```
 
 ------------
