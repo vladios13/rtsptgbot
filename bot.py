@@ -115,7 +115,7 @@ async def send_snap1_value(call: types.CallbackQuery):
         if "Connection refused" in _ex.stderr.decode('utf8'):
             await call.message.reply(f"❌ Ошибка подключения к камере:\n\n<code>Connection refused</code>")
         elif "401" in _ex.stderr.decode('utf8'):
-            await call.message.reply(f"❌ Ошибка подключения к камере по RTSP:\n\n<code>Неправильный логин или пароль</code>")
+            await call.message.reply(f"❌ Ошибка подключения к камере:\n\n<code>Неправильный логин или пароль</code>")
     os.remove(nowOut)
 
 
@@ -124,7 +124,7 @@ async def send_gif1_value(call: types.CallbackQuery):
     try:
         await bot.send_chat_action(call.from_user.id, ChatActions.RECORD_VIDEO)
         text_gif = (
-            "⏳ <b>Подключаюсь к камере 'Шлагбаум:'</b> \n<i>Запись GIF может занять некоторое время....</i>")
+            "⏳ <b>Подключаюсь к камере:</b> \n<i>Запись GIF может занять некоторое время....</i>")
         msg = await call.message.answer(text_gif)
         nowMSK = datetime.now(timezone('Europe/Moscow'))
         cap = datetime.now().strftime('%H:%M:%S')
@@ -142,7 +142,7 @@ async def send_gif1_value(call: types.CallbackQuery):
         if "Connection refused" in _ex.stderr.decode('utf8'):
             await call.message.reply(f"❌ Ошибка подключения к камере:\n\n<code>Connection refused</code>")
         elif "401" in _ex.stderr.decode('utf8'):
-            await call.message.reply(f"❌ Ошибка подключения к камере по RTSP:\n\n<code>Неправильный логин или пароль</code>")
+            await call.message.reply(f"❌ Ошибка подключения к камере:\n\n<code>Неправильный логин или пароль</code>")
     os.remove(nowOut)
 
 
