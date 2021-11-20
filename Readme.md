@@ -13,12 +13,22 @@
 - [ffmpeg-python](https://github.com/kkroening/ffmpeg-python)
 
 
-
 ## Запуск бота ##
 
-Перед первым запуском, требуется переименовать "config-example.py", на config.py. 
-И заполнить все необходимые данные, следуя комментариям в коде. 
+Перед первым запуском, требуется переименовать "config-example.py", в "config.py". 
+Заполнить необходимые данные, следуя комментариям в коде, а также установить все требуемые зависимости.
 
+Клонируем репозиторий: 
+```bash
+git clone https://github.com/vladios13/rtsptgbot.git
+```
+
+Установка зависимостей:
+```bash
+pip3 install -r requirements.txt
+```
+
+Редактируем config.py
 ```python
 TOKEN = ''  # токен Telegram бота
 
@@ -31,7 +41,7 @@ rtsp_ping = "" # IP роутера
 &#xa0;
 
 ### vladios13
-[Блог vladios13](https://blog.vladios13.com/site-backupsh/)
+[Блог vladios13](https://blog.vladios13.com/)
 
 [Telegram](https://t.me/vladios13blog)
 
