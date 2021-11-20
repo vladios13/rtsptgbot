@@ -101,7 +101,7 @@ async def process_gif_command(message: types.Message):
 async def send_snap1_value(call: types.CallbackQuery):
     try:
         nowMSK = datetime.now(timezone('Europe/Moscow'))
-        cap = datetime.now().strftime('%H:%M:%S')
+        caption = datetime.now().strftime('%H:%M:%S')
         nowOut = nowMSK.strftime("snap-%d-%m-%Y-%H-%M-%S.jpg")
         process = (
             ffmpeg
@@ -110,7 +110,7 @@ async def send_snap1_value(call: types.CallbackQuery):
             .run(capture_stderr=True)
         )
         await call.answer()
-        await call.message.answer_photo(types.InputFile(nowOut), caption="<b>Фото сделано:</b> " + str(cap))
+        await call.message.answer_photo(types.InputFile(nowOut), caption="<b>Фото сделано:</b> " + str(caption), reply_markup=get_snap_keyboard())
     except FFmpegError as _ex:
         if "Connection refused" in _ex.stderr.decode('utf8'):
             await call.message.reply(f"❌ Ошибка подключения к камере:\n\n<code>Connection refused</code>")
@@ -123,11 +123,10 @@ async def send_snap1_value(call: types.CallbackQuery):
 async def send_gif1_value(call: types.CallbackQuery):
     try:
         await bot.send_chat_action(call.from_user.id, ChatActions.RECORD_VIDEO)
-        text_gif = (
-            "⏳ <b>Подключаюсь к камере:</b> \n<i>Запись GIF может занять некоторое время....</i>")
+        text_gif = ("⏳ <b>Подключаюсь к камере:</b> \n<i>Запись GIF может занять некоторое время....</i>")
         msg = await call.message.answer(text_gif)
         nowMSK = datetime.now(timezone('Europe/Moscow'))
-        cap = datetime.now().strftime('%H:%M:%S')
+        caption = datetime.now().strftime('%H:%M:%S')
         nowOut = nowMSK.strftime("gif-%d-%m-%Y-%H-%M-%S.mp4")
         process = (
             ffmpeg
@@ -136,7 +135,7 @@ async def send_gif1_value(call: types.CallbackQuery):
             .run(capture_stderr=True)
         )
         await msg.delete()
-        await call.message.answer_animation(types.InputFile(nowOut), caption="GIF записан: " + str(cap), reply_markup=get_gif_keyboard())
+        await call.message.answer_animation(types.InputFile(nowOut), caption="GIF записан: " + str(caption), reply_markup=get_gif_keyboard())
         await call.answer()
     except FFmpegError as _ex:
         if "Connection refused" in _ex.stderr.decode('utf8'):
