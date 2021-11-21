@@ -13,7 +13,7 @@ from ffmpeg import Error as FFmpegError
 from datetime import datetime
 from pytz import timezone
 
-from config import TOKEN, cam_1, rtsp_ping
+from config import TOKEN, CAM_1, RTSP_PING
 
 logger = logging.getLogger(__name__)
 
@@ -29,7 +29,7 @@ logger.info("Starting bot")
 # Чекаем доступность ip-адреса
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.settimeout(2)      #2 Second Timeout
-result = sock.connect_ex((rtsp_ping, 558))
+result = sock.connect_ex((RTSP_PING, 558))
 
 
 # Snap клавиатура
@@ -105,7 +105,7 @@ async def send_snap1_value(call: types.CallbackQuery):
         nowOut = nowMSK.strftime("snap-%d-%m-%Y-%H-%M-%S.jpg")
         process = (
             ffmpeg
-            .input(cam_1, rtsp_transport="tcp", vsync="2")
+            .input(CAM_1, rtsp_transport="tcp", vsync="2")
             .output(nowOut, vframes="1")
             .run(capture_stderr=True)
         )
@@ -130,7 +130,7 @@ async def send_gif1_value(call: types.CallbackQuery):
         nowOut = nowMSK.strftime("gif-%d-%m-%Y-%H-%M-%S.mp4")
         process = (
             ffmpeg
-            .input(cam_1, rtsp_transport="tcp", vsync="2")
+            .input(CAM_1, rtsp_transport="tcp", vsync="2")
             .output(nowOut, crf=40, pix_fmt='yuv420p', preset='ultrafast', vcodec='copy', t=5)
             .run(capture_stderr=True)
         )
