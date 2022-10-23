@@ -21,6 +21,10 @@ bot = Bot(token=TOKEN, parse_mode="HTML")
 dp = Dispatcher(bot)
 
 
+# Кому разрешено запускать бота:
+admin_ids = [1111111, 222222222]
+
+
 # Включаем логирование, чтобы не пропустить важные сообщения
 logging.basicConfig(level=logging.INFO)
 logger.info("Starting bot")
@@ -53,7 +57,7 @@ def get_gif_keyboard():
     return types.InlineKeyboardMarkup(inline_keyboard=kb_contents)
 
 
-@dp.message_handler(commands=['start'])
+@dp.message_handler(commands=['start'], user_id=admin_ids)
 async def process_start_command(message: types.Message):
     await message.answer("👋")
     await message.answer(
@@ -64,7 +68,7 @@ async def process_start_command(message: types.Message):
 
 
 # команда "help"
-@dp.message_handler(commands=['help'])
+@dp.message_handler(commands=['help'], user_id=admin_ids)
 async def process_help_command(message: types.Message):
     await message.reply(
         f"<b>Краткая справка для команд бота:</b> \n\n"
@@ -75,7 +79,7 @@ async def process_help_command(message: types.Message):
 
 
 # пингуем порт
-@dp.message_handler(commands=['ping', 'p'])
+@dp.message_handler(commands=['ping', 'p'], user_id=admin_ids)
 async def process_ping_command(message: types.Message):
     if result == 0:
         await message.answer('✅ Ping успешен')
@@ -84,14 +88,14 @@ async def process_ping_command(message: types.Message):
 
 
 # команда для получения скриншотов
-@dp.message_handler(commands=['snap', 's'])
+@dp.message_handler(commands=['snap', 's'], user_id=admin_ids)
 async def process_snap_command(message: types.Message):
     text_info = ("📷 Нажми на нужную кнопку что бы получить скриншот с камеры:")
     await message.reply(text_info, reply_markup=get_snap_keyboard())
 
 
 # команда для получение Gif файлов
-@dp.message_handler(commands=['gif', 'g'])
+@dp.message_handler(commands=['gif', 'g'], user_id=admin_ids)
 async def process_gif_command(message: types.Message):
     text_info = ("📹 Нажми на нужную кнопку что бы получить запись GIF:\n\n<i>Длительность составляет 5 сек.</i>")
     await message.reply(text_info, reply_markup=get_gif_keyboard())
