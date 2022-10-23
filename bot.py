@@ -98,7 +98,7 @@ async def process_gif_command(message: types.Message):
 
 
 @dp.callback_query_handler(text="snap1")
-async def send_snap1_value(call: types.CallbackQuery):
+async def send_snap_1_value(call: types.CallbackQuery):
     try:
         nowMSK = datetime.now(timezone('Europe/Moscow'))
         caption = datetime.now().strftime('%H:%M:%S')
@@ -120,7 +120,7 @@ async def send_snap1_value(call: types.CallbackQuery):
 
 
 @dp.callback_query_handler(text="gif1")
-async def send_gif1_value(call: types.CallbackQuery):
+async def send_gif_1_value(call: types.CallbackQuery):
     try:
         await bot.send_chat_action(call.from_user.id, ChatActions.RECORD_VIDEO)
         text_gif = ("⏳ <b>Подключаюсь к камере:</b> \n<i>Запись GIF может занять некоторое время....</i>")
